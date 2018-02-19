@@ -13,10 +13,10 @@ function draw() {
 	background(0, 16)
 
 	push()
-	a += 0.07
 	translate(width / 2, height / 2)
 	noFill()
 
+	a += 0.07
 	points.push(spiral(50, a))
 	pointsR.push(spiral(54, a))
 	pointsB.push(spiral(46, a))
@@ -27,13 +27,14 @@ function draw() {
 
 	pop()
 
-	if (createVector(0, 0).dist(points[0]) >= width / 2 + 100) {
+	let max = width > height ? width / 2 : height / 2
+	if (createVector(0, 0).dist(points[0]) >= max) {
 		points.splice(0, 1)
 	}
-	if (createVector(0, 0).dist(pointsR[0]) >= width / 2 + 100) {
+	if (createVector(0, 0).dist(pointsR[0]) >= max) {
 		pointsR.splice(0, 1)
 	}
-	if (createVector(0, 0).dist(pointsB[0]) >= width / 2 + 100) {
+	if (createVector(0, 0).dist(pointsB[0]) >= max) {
 		pointsB.splice(0, 1)
 	}
 }
@@ -41,6 +42,7 @@ function draw() {
 let drawSpiral = (p, col, weight) => {
 	stroke(col)
 	strokeWeight(weight)
+
 	beginShape()
 	for (let i = 0; i < p.length; i++) {
 		vertex(p[i].x, p[i].y)
